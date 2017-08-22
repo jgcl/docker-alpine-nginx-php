@@ -1,0 +1,37 @@
+version: '2'
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    environment:
+      TZ: America/Sao_Paulo
+    volumes:
+     - /docker-volumes/mongo:/data/db
+
+  mysql:
+     container_name: mysql
+     image: mysql
+     environment:
+       TZ: America/Sao_Paulo
+       MYSQL_ROOT_PASSWORD: example
+     volumes:
+      - /docker-volumes/mysql:/var/lib/mysql
+
+  alpinephp:
+    container_name: alpinephp
+    image: jgcl88/alpine-nginx-php71
+    links:
+      - mongodb:mongodb
+    environment:
+      TZ: America/Sao_Paulo
+      MONGO_DB_HOST: mongodb
+      MONGO_DB_PORT: 27017
+      MONGO_DB_DATABASE: database
+      MONGO_DB_USERNAME:
+      MONGO_DB_PASSWORD:
+    ports:
+      - "8180:80"
+
+volumes:
+  data:
+    driver: "local"
