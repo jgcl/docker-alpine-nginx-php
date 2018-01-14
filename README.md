@@ -60,7 +60,7 @@ docker pull jgcl88/alpine-nginx-php
 ```
 
 More info on Docker Hub:
-[https://hub.docker.com/r/jgcl88/alpine-nginx-php/](https://hub.docker.com/r/jgcl88/alpine-nginx-php/)
+[https://hub.docker.com/r/jgcl88/docker-alpine-nginx-php/](https://hub.docker.com/r/jgcl88/docker-alpine-nginx-php/)
 
 # docker run
 ```
