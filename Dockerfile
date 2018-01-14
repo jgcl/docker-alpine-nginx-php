@@ -33,10 +33,10 @@ RUN apk update \
 FROM alpine:3.7
 
 COPY . /
-COPY --from=builder /usr/lib/* /usr/lib/
-COPY --from=builder /lib/* /lib/*
-COPY --from=builder /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so.2
+COPY --from=builder /lib/* /lib/
 COPY --from=builder /lib64/* /lib64/
+COPY --from=builder /usr/lib/* /usr/lib/
+COPY --from=builder /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so.2
 
 ENV ORACLE_BASE /usr/lib/instantclient_12_1
 ENV LD_LIBRARY_PATH /usr/lib/instantclient_12_1
