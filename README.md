@@ -1,7 +1,6 @@
 # powerfull docker alpine nginx php 7.1 and drivers for all databases
 
-[![](https://images.microbadger.com/badges/image/jgcl88/docker-alpine-nginx-php/:latest.svg)](https://microbadger.com/images/jgcl88/docker-alpine-nginx-php/:latest "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/jgcl88/docker-alpine-nginx-php/:latest.svg)](https://microbadger.com/images/jgcl88/docker-alpine-nginx-php/:stable "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/jgcl88/alpine-nginx-php.svg)](https://microbadger.com/images/jgcl88/alpine-nginx-php "Get your own image badge on microbadger.com")
 
 This Docker Image containing:
 - alpine edge
