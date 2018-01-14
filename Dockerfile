@@ -46,7 +46,7 @@ ENV ORACLE_HOME /usr/lib/instantclient_12_1
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update \
     && apk add libaio \
-    && rm instantclient_12_1.zip \
+    && rm /instantclient_12_1.zip \
     && apk add --no-cache \
         nginx \
         nano \
