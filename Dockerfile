@@ -33,10 +33,16 @@ RUN apk update \
 FROM alpine:3.7
 
 COPY . /
-COPY --from=builder /lib/ /lib/
-COPY --from=builder /lib64/ /lib64/
-COPY --from=builder /usr/lib/ /usr/lib/
+COPY --from=builder /lib/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2
+COPY --from=builder /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
 COPY --from=builder /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so.2
+COPY --from=builder /usr/lib/php7/modules/oci8.so /usr/lib/php7/modules/oci8.so
+COPY --from=builder /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so
+COPY --from=builder /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so
+COPY --from=builder /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so
+COPY --from=builder /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/libnnz12.so
+COPY --from=builder /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/instantclient_12_1/libclntsh.so
+COPY --from=builder /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/instantclient_12_1/libnsl.so.1
 
 ENV ORACLE_BASE /usr/lib/instantclient_12_1
 ENV LD_LIBRARY_PATH /usr/lib/instantclient_12_1
