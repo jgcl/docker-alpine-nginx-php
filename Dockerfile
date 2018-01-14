@@ -105,7 +105,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && cp -rf /docker/php/php.ini                       /etc/php7/php.ini \
     && cp -rf /docker/php/www.conf                      /etc/php7/php-fpm.d/www.conf \
     && cp -rf /docker/supervisor/supervisor.conf        /etc/supervisord.conf \
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
+    && php -m
 
 WORKDIR /app
 
