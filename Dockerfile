@@ -1,29 +1,47 @@
-FROM alpine:edge
+FROM frolvlad/alpine-glibc
 
-MAINTAINER Joao Gabriel C. Laass <gabriel@orangepixel.copm.br>
+#https://hub.docker.com/r/frolvlad/alpine-glibc/
+#https://github.com/asg1612/alpine-oracle-instantclient
 
-# Install packages
-RUN apk --update add --no-cache \
-        tzdata \
+COPY . /
+
+ENV ORACLE_BASE /usr/lib/instantclient_12_1
+ENV LD_LIBRARY_PATH /usr/lib/instantclient_12_1
+ENV TNS_ADMIN /usr/lib/instantclient_12_1
+ENV ORACLE_HOME /usr/lib/instantclient_12_1
+
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk update \
+    && apk add libaio \
+    && cp /docker/instantclient_12_1.zip ./ \
+    && unzip instantclient_12_1.zip \
+    && mv instantclient_12_1/ /usr/lib/ \
+    && rm instantclient_12_1.zip \
+    && ln /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so \
+    && ln /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so \
+    && ln /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so \
+    && ln /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/libnnz12.so \
+    && apk add --no-cache \
         nginx \
         nano \
         curl \
         supervisor \
-        gd \
-        freetype \
-        libpng \
-        libjpeg-turbo \
-        freetype-dev \
-        libpng-dev \
         git \
+        zip \
+        unzip \
         php7 \
+        php7-phar \
         php7-dom \
         php7-fpm \
         php7-mbstring \
         php7-mcrypt \
         php7-opcache \
         php7-pdo \
-        php7-pdo_mysql \
+        php7-pdo_mysql \ # mysql
+        php7-pdo_pgsql \ # postgre
+        php7-pdo_sqlite \ #sqlite
+        php7-pdo_odbc \ #sqlserver
+        php7-pdo_dblib \ #sqlserver
         php7-json \
         php7-dev \
         php7-pear \
@@ -34,54 +52,41 @@ RUN apk --update add --no-cache \
         php7-simplexml \
         php7-soap \
         php7-tokenizer \
-        php7-phar \
         php7-openssl \
         php7-json \
         php7-curl \
         php7-ctype \
-        php7-session \
-        php7-gd \
         php7-zlib \
-        # to compile pecl
-        autoconf openssl-dev g++ make
-
-RUN rm -rf /var/cache/apk/* \
-    # install php drive mongodb
-    && pecl install mongodb \
-    && echo 'extension=mongodb.so' > /etc/php7/conf.d/30_mongodb.ini
-
-    # Configuring timezones
-RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime \
-    && echo "America/Sao_Paulo" >  /etc/timezone \
-    # Install Composer
-    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
-    # Create application folder
-    && mkdir -p /var/www/src \
-    # user www for nginx and php-fpm (in setup.sh, we change workdir user/group to www)
+        php7-posix \
+        php7-mongodb \
+        php7-pcntl \
+        php7-iconv \
+        php7-session \
+        gcc musl-dev make \
+    # php oci8
+    && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/instantclient_12_1/libclntsh.so \
+    && cp /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/instantclient_12_1/libnsl.so.1 \
+    && echo 'instantclient,/usr/lib/instantclient_12_1' | pecl install -f oci8 \
+    && echo 'extension=oci8.so' > /etc/php7/conf.d/oracle.ini \
+    # group
     && addgroup -g 1000 -S www \
-    && adduser -u 1000 -D -S -G www -h /var/www/src -g www www \
-    && chown -R www:www /var/lib/nginx
+    && adduser -u 1000 -D -S -G www -h /app -g www www \
+    && chown -R www:www /var/lib/nginx \
+    # config files
+    && mkdir -p /etc/nginx/sites-enabled \
+    && mkdir -p /etc/php7/php-fpm.d \
+    && cp -rf /docker/nginx/nginx.conf                  /etc/nginx/nginx.conf \
+    && cp -rf /docker/nginx/default.conf                /etc/nginx/sites-enabled/default \
+    && cp -rf /docker/php/php.ini                       /etc/php7/php.ini \
+    && cp -rf /docker/php/www.conf                      /etc/php7/php-fpm.d/www.conf \
+    && cp -rf /docker/supervisor/supervisor.conf        /etc/supervisord.conf \
+    # php composer
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
-# Configure Nginx
-COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY config/nginx/default /etc/nginx/sites-enabled/default
+WORKDIR /app
 
-# Configure PHP-FPM
-COPY config/php/php.ini /etc/php7/php.ini
-COPY config/php/www.conf /etc/php7/php-fpm.d/www.conf
+# portal
+EXPOSE 80
 
-# Configure supervisord
-COPY config/supervisord.conf /etc/supervisord.conf
-
-# Coping PHP example files
-COPY src/ /var/www/src/
-
-# Setting the workdir
-WORKDIR /var/www/src
-
-# Start Supervisord
-ADD config/start.sh /start.sh
-RUN chmod +x /start.sh
-
-# Start Supervisord
-CMD ["/start.sh"]
+# start
+CMD ["/docker/start.sh"]

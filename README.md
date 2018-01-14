@@ -1,9 +1,9 @@
-# docker alpine nginx php 7.1
+# powerfull docker alpine nginx php 7.1 and drivers for all databases
 
-Essa imagem tem o peso médio de 333MB e inclui:
+This Docker Image containg:
 - alpine edge
-- php 7.1 (cli e fpm)
-- extensões do php:
+- php 7.1 (cli and fpm)
+- php extensions:
     - mysql
     - mongodb
     - pear
