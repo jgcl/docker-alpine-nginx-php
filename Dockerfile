@@ -37,11 +37,11 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-mcrypt \
         php7-opcache \
         php7-pdo \
-        php7-pdo_mysql \ # mysql
-        php7-pdo_pgsql \ # postgre
-        php7-pdo_sqlite \ #sqlite
-        php7-pdo_odbc \ #sqlserver
-        php7-pdo_dblib \ #sqlserver
+        php7-pdo_mysql \
+        php7-pdo_pgsql \
+        php7-pdo_sqlite \
+        php7-pdo_odbc \
+        php7-pdo_dblib \
         php7-json \
         php7-dev \
         php7-pear \
@@ -63,16 +63,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-iconv \
         php7-session \
         gcc musl-dev make \
-    # php oci8
     && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/instantclient_12_1/libclntsh.so \
     && cp /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/instantclient_12_1/libnsl.so.1 \
     && echo 'instantclient,/usr/lib/instantclient_12_1' | pecl install -f oci8 \
     && echo 'extension=oci8.so' > /etc/php7/conf.d/oracle.ini \
-    # group
     && addgroup -g 1000 -S www \
     && adduser -u 1000 -D -S -G www -h /app -g www www \
     && chown -R www:www /var/lib/nginx \
-    # config files
     && mkdir -p /etc/nginx/sites-enabled \
     && mkdir -p /etc/php7/php-fpm.d \
     && cp -rf /docker/nginx/nginx.conf                  /etc/nginx/nginx.conf \
@@ -80,7 +77,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && cp -rf /docker/php/php.ini                       /etc/php7/php.ini \
     && cp -rf /docker/php/www.conf                      /etc/php7/php-fpm.d/www.conf \
     && cp -rf /docker/supervisor/supervisor.conf        /etc/supervisord.conf \
-    # php composer
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 WORKDIR /app
