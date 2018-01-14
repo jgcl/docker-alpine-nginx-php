@@ -45,13 +45,10 @@ services:
   app:
     container_name: app
     image: jgcl88/alpine-nginx-php
-    command: ["sh", "-c", "/docker/start.sh"]
     links:
       - sqlsrv
       - mysql
       - oraclesrv
-    volumes:
-      - ./app:/app
     ports:
       - "80:80"
     network_mode: "bridge"
