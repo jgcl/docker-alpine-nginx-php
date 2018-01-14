@@ -24,10 +24,12 @@ jobs:
       - run:
           name: Docker send image to dockerhub
           command: |
+            TAG="${CIRCLE_BUILD_NUM}"
             docker push jgcl88/alpine-nginx-php:ci-$TAG
 
       - run:
           name: Latest tag
           command: |
+            TAG="${CIRCLE_BUILD_NUM}"
             docker tag jgcl88/alpine-nginx-php:ci-$TAG jgcl88/alpine-nginx-php:latest-ci
             docker push jgcl88/alpine-nginx-php:latest-ci
