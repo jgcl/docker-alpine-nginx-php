@@ -10,7 +10,7 @@ jobs:
           name: Docker Build
           command: |
             TAG="${CIRCLE_BUILD_NUM}"
-            docker build -t jgcl88/alpine-nginx-php:ci-$TAG .
+            docker build --compress -t jgcl88/alpine-nginx-php:ci-$TAG .
 
       - run:
           name: Docker Images

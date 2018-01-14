@@ -37,6 +37,7 @@ COPY --from=builder /lib/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2
 COPY --from=builder /lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
 COPY --from=builder /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so.2
 COPY --from=builder /usr/lib/php7/modules/oci8.so /usr/lib/php7/modules/oci8.so
+COPY --from=builder /usr/lib/libclntsh.so.12.1 /usr/lib/libclntsh.so.12.1
 COPY --from=builder /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so
 COPY --from=builder /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so
 COPY --from=builder /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so
