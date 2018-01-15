@@ -13,7 +13,7 @@ This Docker Image containing:
     - PostgreSQL
     - SQLite
     - MongoDB
-    - Oracle - via OCI8 - see 'oracle' branch
+    - Oracle 
     
 - all php extensions:
 ```
@@ -31,7 +31,7 @@ mbstring
 mcrypt
 mongodb
 mysqlnd
-oci8 (see 'oracle' branch)
+oci8 
 openssl
 pcntl
 pcre
@@ -73,7 +73,7 @@ docker run \
     --name=myContainerName \
     -v /myFolder:/app \
     -p 80:80 \
-    -d jgcl88/alpine-nginx-php
+    -d jgcl88/alpine-nginx-php:oracle
 ```
 
 # docker compose
@@ -85,15 +85,17 @@ Example containing:
 - PostgreSQL database
 - SQLite database
 - MongoDB database
-- Oracle database (see 'oracle' branch) 
+- Oracle database
 - Migrations
 
-See docker-compose.yml file.
+See docker-compose.yml and docker-compose-databases.yml files.
 
 #### to up...
 
 ```
 docker-compose up -d
+or
+docker-compose -f docker-compose-databases.yml up -d
 ```
 
 See Powerfull Lumen 5.5 example using this image and swagger-ui to change data in all databases:

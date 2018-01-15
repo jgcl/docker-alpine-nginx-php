@@ -10,7 +10,7 @@ jobs:
           name: Docker Build
           command: |
             TAG="${CIRCLE_BUILD_NUM}"
-            docker build -t jgcl88/alpine-nginx-php:ci-$TAG .
+            docker build -t jgcl88/alpine-nginx-php:oracle-ci-$TAG .
 
       - run:
           name: Docker Images
@@ -25,11 +25,11 @@ jobs:
           name: Docker send image to dockerhub
           command: |
             TAG="${CIRCLE_BUILD_NUM}"
-            docker push jgcl88/alpine-nginx-php:ci-$TAG
+            docker push jgcl88/alpine-nginx-php:oracle-ci-$TAG
 
       - run:
           name: Latest tag
           command: |
             TAG="${CIRCLE_BUILD_NUM}"
-            docker tag jgcl88/alpine-nginx-php:ci-$TAG jgcl88/alpine-nginx-php:latest-ci
-            docker push jgcl88/alpine-nginx-php:latest-ci
+            docker tag jgcl88/alpine-nginx-php:oracle-ci-$TAG jgcl88/alpine-nginx-php:oracle
+            docker push jgcl88/alpine-nginx-php:oracle

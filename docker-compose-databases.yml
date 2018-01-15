@@ -62,7 +62,7 @@ services:
 
   app:
     container_name: app
-    image: jgcl88/alpine-nginx-php
+    image: jgcl88/alpine-nginx-php:oracle
     depends_on:
       - mysqlsrv
       - oraclesrv
