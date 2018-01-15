@@ -1,0 +1,80 @@
+version: '3'
+
+services:
+  mysqlsrv:
+    container_name: mysqlsrv
+    image: mysql:5.7
+    #volumes:
+      #- ~/docker-volumes/mysql/:/var/lib/mysql
+    environment:
+      - TZ=America/Sao_Paulo
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=TestPassWord1234
+    ports:
+      - "3306:3306"
+    network_mode: "bridge"
+
+  sqlserversrv:
+    container_name: sqlserversrv
+    image: microsoft/mssql-server-linux:latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=TestPassWord1234
+      - MSSQL_PID=Express
+    #volumes:
+      #- ~/docker-volumes/sqlsrv:/var/opt/mssql
+      # /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'TestPassWord1234'
+    ports:
+      - "1433:1433"
+    network_mode: "bridge"
+
+  oraclesrv:
+    container_name: oraclesrv
+    image: wnameless/oracle-xe-11g
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_PASSWORD_VERIFY=false
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_ENABLE_XDB=false
+    ports:
+      - "1521:1521"
+    network_mode: "bridge"
+
+  postgresqlsrv:
+    container_name: postgresqlsrv
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=TestPassWord1234
+      - POSTGRES_DB=test
+    ports:
+      - "5432:5432"
+    network_mode: "bridge"
+
+  mongosrv:
+    container_name: mongosrv
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    network_mode: "bridge"
+
+  app:
+    container_name: app
+    image: jgcl88/alpine-nginx-php
+    depends_on:
+      - mysqlsrv
+      - oraclesrv
+      - sqlserversrv
+      - postgresqlsrv
+      - mongosrv
+    links:
+      - mysqlsrv
+      - sqlserversrv
+      - oraclesrv
+      - postgresqlsrv
+      - mongosrv
+    ports:
+      - "80:80"
+    network_mode: "bridge"
