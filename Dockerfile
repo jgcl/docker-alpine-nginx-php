@@ -90,7 +90,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && adduser -u 1000 -D -S -G www -h /app -g www www \
     && chown -R www:www /var/lib/nginx \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer \
-    && php -m
+    && php -m \
+    && ls -lah /usr/lib/instantclient_12_1 \
+    && ls -lah /usr/lib/php7/modules/
 
 WORKDIR /app
 
