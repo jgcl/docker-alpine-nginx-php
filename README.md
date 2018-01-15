@@ -2,6 +2,10 @@
 
 [![](https://images.microbadger.com/badges/image/jgcl88/alpine-nginx-php.svg)](https://microbadger.com/images/jgcl88/alpine-nginx-php "Get your own image badge on microbadger.com")
 
+[![](https://raw.githubusercontent.com/play-with-docker/stacks/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](http://play-with-docker.com/?stack=https://raw.githubusercontent.com/jgcl/docker-alpine-nginx-php/master/docker-compose.yml "Test Online in play with docker")
+
+
+
 This Docker Image containing:
 - alpine edge
 - php 7.1 (cli and fpm)
