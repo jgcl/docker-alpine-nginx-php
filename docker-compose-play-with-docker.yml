@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  app:
+    image: jgcl88/alpine-nginx-php
+    ports:
+      - "80:80"
