@@ -4,7 +4,7 @@
 mkdir -p /run/nginx
 touch /run/nginx/nginx.pid
 
-composer install
+#composer install
 
 # Start supervisord and services
 supervisord -n -c /etc/supervisord.conf
