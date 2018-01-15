@@ -4,17 +4,16 @@
 
 [![](https://raw.githubusercontent.com/play-with-docker/stacks/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](http://play-with-docker.com/?stack=https://raw.githubusercontent.com/jgcl/docker-alpine-nginx-php/master/docker-compose-play-with-docker.yml "Test Online in play with docker")
 
-
-
 This Docker Image containing:
-- alpine edge
-- php 7.1 (cli and fpm)
-- php database extensions:
-    - mysql
-    - oracle (via oci8)
-    - mongodb
-    - sql server
-    - sqlite
+- Alpine 3.7;
+- PHP 7.1 (CLI and FPM);
+- PHP database extensions:
+    - MySQL
+    - SQL Server
+    - PostgreSQL
+    - SQLite
+    - MongoDB
+    - Oracle - via OCI8 - see 'oracle' branch
     
 - all php extensions:
 ```
@@ -32,7 +31,7 @@ mbstring
 mcrypt
 mongodb
 mysqlnd
-oci8
+oci8 (see 'oracle' branch)
 openssl
 pcntl
 pcre
@@ -79,74 +78,17 @@ docker run \
 
 # docker compose
 
-Powerfull example containing:
-- application
-- oracle database
-- mysql database
-- sql server database
-- sqlite database
-- mongo database 
+Example containing:
+- Simple phpinfo displaying all available drivers
+- MySQL database
+- SQL Server database
+- PostgreSQL database
+- SQLite database
+- MongoDB database
+- Oracle database (see 'oracle' branch) 
+- Migrations
 
-```
-version: '3'
-
-services:
-  mysql:
-    container_name: mysql
-    image: mysql:5.7
-    #volumes:
-      #- ~/docker-volumes/mysql/:/var/lib/mysql
-    environment:
-      - TZ=America/Sao_Paulo
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=test
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test1234
-    ports:
-      - "3306:3306"
-    network_mode: "bridge"
-
-  sqlsrv:
-    container_name: sqlsrv
-    image: microsoft/mssql-server-linux:latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=TestPassWord1234
-      - MSSQL_PID=Express
-    #volumes:
-      #- ~/docker-volumes/sqlsrv:/var/opt/mssql
-      # /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'TestPassWord1234'
-    ports:
-      - "1433:1433"
-    network_mode: "bridge"
-
-  oraclesrv:
-    container_name: oraclesrv
-    image: wnameless/oracle-xe-11g
-    environment:
-      - ORACLE_ALLOW_REMOTE=true
-      - ORACLE_PASSWORD_VERIFY=false
-      - ORACLE_DISABLE_ASYNCH_IO=true
-      - ORACLE_ENABLE_XDB=false
-    ports:
-      - "1521:1521"
-    network_mode: "bridge"
-
-  app:
-    container_name: app
-    image: jgcl88/alpine-nginx-php
-    command: ["sh", "-c", "/docker/start.sh"]
-    links:
-      - sqlsrv
-      - mysql
-      - oraclesrv
-    volumes:
-      - ./app:/app
-    ports:
-      - "80:80"
-    network_mode: "bridge"
-
-```
+See docker-compose.yml file.
 
 #### to up...
 
