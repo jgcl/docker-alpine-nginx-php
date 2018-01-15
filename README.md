@@ -13,7 +13,7 @@ This Docker Image containing:
     - PostgreSQL
     - SQLite
     - MongoDB
-    - Oracle - via OCI8 - see 'oracle' branch
+    - Oracle - via OCI8 - see '[./tree/oracle](oracle)' branch
     
 - all php extensions:
 ```
@@ -85,7 +85,7 @@ Example containing:
 - PostgreSQL database
 - SQLite database
 - MongoDB database
-- Oracle database (see 'oracle' branch) 
+- Oracle database (see '[./tree/oracle](oracle)' branch) 
 - Migrations
 
 See [docker-compose.yml](docker-compose.yml) and [docker-compose-databases.yml](docker-compose-databases.yml) files.
