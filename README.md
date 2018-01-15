@@ -65,7 +65,7 @@ docker pull jgcl88/alpine-nginx-php
 ```
 
 More info on Docker Hub:
-[https://hub.docker.com/r/jgcl88/docker-alpine-nginx-php/](https://hub.docker.com/r/jgcl88/docker-alpine-nginx-php/)
+[https://hub.docker.com/r/jgcl88/alpine-nginx-php/](https://hub.docker.com/r/jgcl88/alpine-nginx-php/)
 
 # docker run
 ```
@@ -88,7 +88,7 @@ Example containing:
 - Oracle database (see 'oracle' branch) 
 - Migrations
 
-See docker-compose.yml file.
+See [docker-compose.yml](docker-compose.yml) and [docker-compose-databases.yml](docker-compose-databases.yml) files.
 
 #### to up...
 

@@ -32,4 +32,6 @@ jobs:
           command: |
             TAG="${CIRCLE_BUILD_NUM}"
             docker tag jgcl88/alpine-nginx-php:ci-$TAG jgcl88/alpine-nginx-php:latest-ci
+            docker tag jgcl88/alpine-nginx-php:ci-$TAG jgcl88/alpine-nginx-php:latest
             docker push jgcl88/alpine-nginx-php:latest-ci
+            docker push jgcl88/alpine-nginx-php:latest
