@@ -12,7 +12,7 @@ RUN apk update \
     && unzip instantclient_12_1.zip \
     && mv instantclient_12_1/ /usr/lib/ \
     && rm instantclient_12_1.zip \
-    && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/instantclient_12_1/libclntsh.so
+    && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/instantclient_12_1/libclntsh.so \
     && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so \
     && cp /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so \
     && cp /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so \
