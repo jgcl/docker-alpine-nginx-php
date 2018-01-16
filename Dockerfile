@@ -100,8 +100,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-pcntl \
         php7-iconv \
         php7-session \
+    && mkdir -p /usr/lib/instantclient_12_1/ \
+    && mkdir -p /lib/ \
+    && mkdir -p /lib64/ \
+    && mkdir -p /usr/glibc-compat/lib/ \
+    && mkdir -p /usr/lib/php7/modules/ \
+    && mkdir -p /usr/lib/ \
     && touch /usr/lib/instantclient_12_1/libnsl.so.1 \
-
     && mv /libs/ld-linux-x86-64.so.2 /lib/ld-linux-x86-64.so.2 \
     && mv /libs/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2 \
     && mv /libs/ld-linux-x86-64.so.2 /usr/glibc-compat/lib/ld-linux-x86-64.so.2 \
