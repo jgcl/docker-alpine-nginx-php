@@ -12,11 +12,11 @@ RUN apk update \
     && unzip instantclient_12_1.zip \
     && mv instantclient_12_1/ /usr/lib/ \
     && rm instantclient_12_1.zip \
-    && ln /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so \
-    && ln /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so \
-    && ln /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so \
-    && ln /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/libnnz12.so \
-    && ln /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/instantclient_12_1/libnsl.so.1 \
+    && cp /usr/lib/instantclient_12_1/libclntsh.so.12.1 /usr/lib/libclntsh.so \
+    && cp /usr/lib/instantclient_12_1/libocci.so.12.1 /usr/lib/libocci.so \
+    && cp /usr/lib/instantclient_12_1/libociei.so /usr/lib/libociei.so \
+    && cp /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/libnnz12.so \
+    && cp /usr/lib/instantclient_12_1/libnnz12.so /usr/lib/instantclient_12_1/libnsl.so.1 \
     && apk add --no-cache \
         php7 \
         php7-phar \
