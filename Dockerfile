@@ -29,9 +29,9 @@ RUN apk update \
     && echo 'extension=oci8.so' > /etc/php7/conf.d/oracle.ini \
     && php -m \
     && mkdir -p /libs \
-    && cp /lib/ld-linux-x86-64.so.2 /libs \
-    && cp /lib64/ld-linux-x86-64.so.2 /libs \
-    && /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /libs
+    && cp /lib/ld-linux-x86-64.so.2 /libs/ld-linux-x86-64.so.2 \
+    && cp /lib64/ld-linux-x86-64.so.2 /libs/ld-linux-x86-64.so.2 \
+    && cp /usr/glibc-compat/lib/ld-linux-x86-64.so.2 /libs/ld-linux-x86-64.so.2
 
 FROM alpine:3.7
 
