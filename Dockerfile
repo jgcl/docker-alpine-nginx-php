@@ -2,8 +2,7 @@ FROM alpine:3.7
 
 COPY . /
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk update \
+RUN apk update \
     && apk add --no-cache \
         nginx \
         nano \
@@ -25,7 +24,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-pdo_sqlite \
         php7-pdo_odbc \
         php7-pdo_dblib \
-        php7-mongodb \
         php7-json \
         php7-xml \
         php7-xmlwriter \
@@ -54,6 +52,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && cp -rf /docker/php/www.conf                      /etc/php7/php-fpm.d/www.conf \
     && cp -rf /docker/supervisor/supervisor.conf        /etc/supervisord.conf \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+
+RUN pecl install -f mongodb \
+    && echo 'extension=mongodb.so' > /etc/php7/conf.d/30_mongodb.ini
 
 WORKDIR /app
 
