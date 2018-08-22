@@ -45,7 +45,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-session \
     && addgroup -g 1000 -S www \
     && adduser -u 1000 -D -S -G www -h /app -g www www \
-    && chown -R www:www /var/lib/nginx \
+    && chown -R www:www /var/lib/nginx /var/tmp/nginx  \
     && mkdir -p /etc/nginx/sites-enabled \
     && mkdir -p /etc/php7/php-fpm.d \
     && cp -rf /docker/nginx/nginx.conf                  /etc/nginx/nginx.conf \
