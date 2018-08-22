@@ -41,6 +41,11 @@ RUN apk update \
         php7-pcntl \
         php7-iconv \
         php7-session \
+        php7-dev \
+        php7-pear \
+        openssl-dev \
+        g++ \
+        make \
     && addgroup -g 1000 -S www \
     && adduser -u 1000 -D -S -G www -h /app -g www www \
     && chown -R www:www /var/lib/nginx /var/tmp/nginx  \
