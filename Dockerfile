@@ -1,7 +1,5 @@
 FROM alpine:3.11
 
-COPY . /
-
 RUN apk update \
     && apk add --no-cache \
         nginx \
@@ -47,6 +45,8 @@ RUN apk update \
         openssl-dev \
         g++ \
         make
+
+COPY . /
 
 RUN addgroup -g 1000 -S www \
     && adduser -u 1000 -D -S -G www -h /app -g www www \
