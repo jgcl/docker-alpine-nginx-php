@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.11
 
 COPY . /
 
@@ -43,16 +43,19 @@ RUN apk update \
         php7-session \
         php7-dev \
         php7-pear \
+        php7-fileinfo \
         openssl-dev \
         g++ \
-        make \
-    && addgroup -g 1000 -S www \
+        make
+
+RUN addgroup -g 1000 -S www \
     && adduser -u 1000 -D -S -G www -h /app -g www www \
+    && mkdir -p /var/tmp/nginx \
     && chown -R www:www /var/lib/nginx /var/tmp/nginx  \
-    && mkdir -p /etc/nginx/sites-enabled \
+    && mkdir -p /etc/nginx/conf.d \
     && mkdir -p /etc/php7/php-fpm.d \
     && cp -rf /docker/nginx/nginx.conf                  /etc/nginx/nginx.conf \
-    && cp -rf /docker/nginx/default.conf                /etc/nginx/sites-enabled/default \
+    && cp -rf /docker/nginx/default.conf                /etc/nginx/conf.d/default.conf \
     && cp -rf /docker/php/php.ini                       /etc/php7/php.ini \
     && cp -rf /docker/php/www.conf                      /etc/php7/php-fpm.d/www.conf \
     && cp -rf /docker/supervisor/supervisor.conf        /etc/supervisord.conf \

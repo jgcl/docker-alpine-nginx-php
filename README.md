@@ -1,12 +1,12 @@
-# powerfull docker alpine nginx php 7.1 and drivers for all databases
+# powerfull docker alpine nginx php 7.3 and drivers for all databases
 
 [![](https://images.microbadger.com/badges/image/jgcl88/alpine-nginx-php.svg)](https://microbadger.com/images/jgcl88/alpine-nginx-php "Get your own image badge on microbadger.com")
 
 [![](https://raw.githubusercontent.com/play-with-docker/stacks/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](http://play-with-docker.com/?stack=https://raw.githubusercontent.com/jgcl/docker-alpine-nginx-php/master/docker-compose.yml "Test Online in play with docker")
 
 This Docker Image containing:
-- Alpine 3.7;
-- PHP 7.1 (CLI and FPM);
+- Alpine 3.11;
+- PHP 7.3 (CLI and FPM);
 - PHP database extensions:
     - MySQL
     - SQL Server
